@@ -1,0 +1,7 @@
+USE vCAC6;
+GO
+Select t.VirtualMachineTemplateName, tp.PropertyValue, rp.name
+FROM dbo.VirtualMachineTemplateProperties AS tp
+       JOIN dbo.VirtualMachineTemplate AS t ON tp.EntityID=t.VirtualMachineTemplateID
+       JOIN dbo.HostReservationPolicy AS rp ON t.ReservationPolicyID=rp.id 
+WHERE tp.PropertyName='__clonespec' AND rp.name not like '%IHGD%';
